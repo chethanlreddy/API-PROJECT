@@ -5,7 +5,6 @@ from lib2to3.pgen2.token import BACKQUOTE
 from operator import le
 from os import access
 from turtle import pos
-from click import option
 from pydantic import BaseModel, EmailStr, conint
 from datetime import datetime
 from typing import Optional
