@@ -9,7 +9,7 @@ class Setting(BaseSettings):
     database_username: str = 'postgres'
     secrete_key: str = 'kjsbdkgjbrsgfvsdf7bvksd87fkshfdshgjhdfsfg'
     algorithm:  str = 'HS256'
-    access_token_expiry_minutes: int = 20
+    access_token_expiry_minutes: int = 2000
 
     class Config:
         env_file = '.env'

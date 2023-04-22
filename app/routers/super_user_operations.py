@@ -6,7 +6,7 @@ from .. import schemas
 
 from .. import models, database, schemas, utils, oauth2
 router = APIRouter(
-    prefix='/fileinsert',
+    prefix='/fileinser',
     tags=['upload file']
 )
 @router.post('/',status_code=status.HTTP_201_CREATED)

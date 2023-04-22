@@ -30,3 +30,26 @@ def get_user(id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f'userid with {id} not found')
     return get_user
+
+
+@router.post('/super_user')
+def user_create_super_user(user = schemas.userCreate, db: Session = Depends(get_db)):
+    search_user = db.query(models.SuperUser).filter(models.User.email == user.email)
+    if search_user.first():
+        raise HTTPException(status_code=status.HTTP_406_NOT_ACCEPTABLE, detail=f'{user.email} is already created')
+    user.password = utils.hassing_password(user.password)
+    new_user = models.SuperUser(**user.dict())
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    return new_user
+
+
+
+
+
+
+
+
+
+    
