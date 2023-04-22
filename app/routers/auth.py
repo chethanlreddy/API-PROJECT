@@ -23,3 +23,15 @@ def login(user_credentials: OAuth2PasswordRequestForm = Depends(), db: Session =
                             detail='Invalid credentials')
     access_token = oauth2.create_access_token(data={'user_id':user.id})
     return{'access_token':access_token,'token_type':'Bearer'}
+
+
+
+@router.post('/super_user')
+def super_user(user_payload : OAuth2PasswordRequestForm = Depends(), db: Session = Depends(database.get_db)):
+    user = db.query(models.SuperUser).filter(models.SuperUser.email == user_payload.username).first()
+    if not user:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,detail=f'Invalid credentials')
+    if not utils.verify(user_payload.password,user.password):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,detail=f'incalid user')
+    access_token = oauth2.create_access_token(data={'user_id':user.id})
+    return {'access_token':access_token,'token_type':'Bearer'}

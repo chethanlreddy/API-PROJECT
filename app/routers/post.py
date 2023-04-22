@@ -101,3 +101,6 @@ def update_post(id: int, post: schemas.postCreate, db: Session = Depends(get_db)
     update_query.update(post.dict(), synchronize_session=False)
     db.commit()
     return update_query.first()
+
+
+
