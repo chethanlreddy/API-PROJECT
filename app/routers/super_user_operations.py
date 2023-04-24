@@ -11,6 +11,8 @@ router = APIRouter(
 )
 @router.post('/')
 def super_user_operations():
+    '''delete - can delete any posts made'''
+    
     pass
 
 #commit
