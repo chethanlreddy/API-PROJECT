@@ -9,8 +9,18 @@
 #     tags=['users']
 # )
 
-from .. import utils
-
-
-
-utils.log.info('hello hey')
+import json
+import requests
+API_TOKEN = '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'
+API_URL = "https://api-inference.huggingface.co/models/gpt2"
+headers = {"Authorization": f"Bearer {API_TOKEN}"}
+def query(payload):
+    data = json.dumps(payload)
+    response = requests.request("POST", API_URL, headers=headers, data=data)
+    return json.loads(response.content.decode("utf-8"))
+    # return response.content
+def generate_text(payload):
+    payload = {'human': 'hi','ai':'you are a post content creater','human':payload,'ai':''}
+    data = query(json.dumps(payload))
+    return data
+print( generate_text('write me a paragraph about morning'))

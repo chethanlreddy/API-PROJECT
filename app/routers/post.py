@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 from typing import List, Optional
 from ..database import get_db
+from . import copilot
 
 
 router = APIRouter(
@@ -43,6 +44,12 @@ def create_post(post: schemas.postCreate, db: Session = Depends(get_db),
     db.commit()
     db.refresh(new_post)
     return new_post
+
+@router.post('/generate_post/')
+def create_generate_post(title,db:Session = Depends(get_db)):
+    new_post = {'title' : title, 'content':copilot.generate_text(payload=title),'published':True}
+    
+    pass
 
 
 @router.get('/{id}', response_model=schemas.postOut)
