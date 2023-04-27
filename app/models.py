@@ -32,9 +32,9 @@ class Vote(Base):
         'posts.id', ondelete='CASCADE'), primary_key=True)
 
 class SuperUser(Base):
-    __tablename__ = 'super_user'
+    __tablename__ = 'superuser'
     id = Column(Integer, primary_key=True,nullable=False)
-    email = Column(string,unique=True,nullable=False)
+    email = Column(String,unique=True,nullable=False)
     password = Column(String,nullable=False)
     create_at = Column(TIMESTAMP(timezone=True),
                         nullable=False, server_default=text('now()'))

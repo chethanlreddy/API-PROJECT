@@ -45,11 +45,11 @@ def create_post(post: schemas.postCreate, db: Session = Depends(get_db),
     db.refresh(new_post)
     return new_post
 
-@router.post('/generate_post/')
-def create_generate_post(title,db:Session = Depends(get_db)):
-    new_post = {'title' : title, 'content':copilot.generate_text(payload=title),'published':True}
+# @router.post('/generate_post/')
+# def create_generate_post(title,db:Session = Depends(get_db)):
+#     new_post = {'title' : title, 'content':copilot.generate_text(payload=title),'published':True}
     
-    pass
+#     pass
 
 
 @router.get('/{id}', response_model=schemas.postOut)
